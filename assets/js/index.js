@@ -158,7 +158,7 @@ var options = {
     width: 320,
     type: 'pie',
   },
-  labels: ["Visitors", "Subscribers", "Contributor", "Author"],
+  labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
   fill: {
     type: 'gradient',
     gradient: {

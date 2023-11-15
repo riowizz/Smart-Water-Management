@@ -97,7 +97,7 @@ var options = {
 // chart 2
 var options = {
     series: [{
-        name: "Visitors",
+        name: "Temperature",
         data: [240, 640, 414, 755, 257, 500, 180]
     }],
     chart: {

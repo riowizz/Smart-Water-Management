@@ -152,7 +152,7 @@ var options = {
     },
     //colors: ["#12bf24"],
     xaxis: {
-        categories: ["Visitors", "Subscribers", "Contributor", "Author"]
+        categories: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     },
     tooltip: {
         theme: 'dark',
@@ -175,13 +175,13 @@ var options = {
 // chart 3
   
 var options = {
-    series: [89, 45, 35, 62],
+    series: [89, 45, 35, 62, 32, 12, 82],
     chart: {
     width: 340,
     type: 'donut',
   },
-  labels: ["Visitors", "Subscribers", "Contributor", "Author"],
-  colors: ["#3361ff", "#e72e2e", "#12bf24", "#ff6632"],
+  labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+  colors: ["#3361ff", "#e72e2e", "#12bf24", "#ff6632", "#e1202e", "#01bf24", "#0f6632"],
   legend: {
     show: false,
     position: 'top',
@@ -319,10 +319,10 @@ var optionsLine = {
     },
     colors: ["#32bfff", '#ff6632'],
     series: [{
-        name: "Posts",
+        name: "Moisture",
         data: [1, 15, 56, 20, 33, 27, 15]
     }, {
-        name: "Comments",
+        name: "Temperature",
         data: [30, 33, 21, 42, 30, 33, 21]
     }],
     markers: {
@@ -341,7 +341,7 @@ var optionsLine = {
     //labels: ['01/15/2002', '01/16/2002', '01/17/2002', '01/18/2002', '01/19/2002', '01/20/2002'],
     xaxis: {
         //type: 'datetime',
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+        categories: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
     },
     legend: {
         position: 'top',
