@@ -206,21 +206,16 @@ var options = {
 
 
 
-	
-	// chart 4
-	
-	var options = {
-        series: [68],
-        chart: {
-            foreColor: '#9ba7b2',
-        height: 280,
-        type: 'radialBar',
-      },
-    plotOptions: {
-        radialBar: {
-            //startAngle: -130,
-            //endAngle: 130,
-            hollow: {
+var options = {
+            series: [68],
+            chart: {
+                foreColor: '#9ba7b2',
+                height: 280,
+                type: 'radialBar',
+            },
+            plotOptions: {
+                radialBar: {
+                    hollow: {
                 margin: 0,
                 size: '82%',
                 //background: '#fff',
@@ -268,29 +263,189 @@ var options = {
                     offsetY: 10,
                 }
             }
-        }
-    },
-    fill: {
-        type: 'gradient',
-        gradient: {
-            shade: 'dark',
-            type: 'horizontal',
-            shadeIntensity: 0.5,
-            gradientToColors: ['#3361ff'],
-            inverseColors: false,
-            opacityFrom: 1,
-            opacityTo: 1,
-            stops: [0, 100]
-        }
-    },
-    colors: ["#3361ff"],
-      labels: ['mc'],
-      };
+                }
+            },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shade: 'dark',
+                    type: 'horizontal',
+                    shadeIntensity: 0.5,
+                    gradientToColors: ['#3361ff'],  // Change this color to the desired one
+                    inverseColors: false,
+                    opacityFrom: 1,
+                    opacityTo: 1,
+                    stops: [0, 100]
+                }
+            },
+            colors: ["#00ff00"],  // Change this color to the desired one
+            labels: ['Water Moisture'],
+        };
 
-      var chart = new ApexCharts(document.querySelector("#chart4"), options);
-      chart.render();
-      
-      
+        var chart = new ApexCharts(document.querySelector("#chart4"), options);
+        chart.render();
+
+
+        // chart 4-1
+
+        var options = {
+            series: [68],
+            chart: {
+                foreColor: '#9ba7b2',
+                height: 280,
+                type: 'radialBar',
+            },
+            plotOptions: {
+                radialBar: {
+                    hollow: {
+                        margin: 0,
+                        size: '82%',
+                        image: undefined,
+                        imageOffsetX: 0,
+                        imageOffsetY: 0,
+                        position: 'front',
+                        dropShadow: {
+                            enabled: false,
+                            top: 3,
+                            left: 0,
+                            blur: 4,
+                            color: 'rgba(0, 169, 255, 0.15)',
+                            opacity: 0.65
+                        }
+                    },
+                    track: {
+                        background: '#dfecff',
+                        margin: 0,
+                        dropShadow: {
+                            enabled: false,
+                            top: -3,
+                            left: 0,
+                            blur: 4,
+                            color: 'rgba(79, 23, 131, 0.85)',
+                            opacity: 0.65
+                        }
+                    },
+                    dataLabels: {
+                        showOn: 'always',
+                        name: {
+                            offsetY: -25,
+                            show: true,
+                            color: '#6c757d',
+                            fontSize: '16px'
+                        },
+                        value: {
+                            formatter: function (val) {
+                                return val + "%";
+                            },
+                            color: '#000',
+                            fontSize: '45px',
+                            show: true,
+                            offsetY: 10,
+                        }
+                    }
+                }
+            },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shade: 'dark',
+                    type: 'horizontal',
+                    shadeIntensity: 0.5,
+                    gradientToColors: ['#ff6384'], // Change this color to the desired one
+                    inverseColors: false,
+                    opacityFrom: 1,
+                    opacityTo: 1,
+                    stops: [0, 100]
+                }
+            },
+            colors: ["#36a2eb"], // Change this color to the desired one
+            labels: ['Temperature'],
+        };
+
+
+        var chart = new ApexCharts(document.querySelector("#chart4-1"), options);
+        chart.render();
+
+
+        // chart 4-2
+
+        var options = {
+            series: [68],
+            chart: {
+                foreColor: '#9ba7b2',
+                height: 280,
+                type: 'radialBar',
+            },
+            plotOptions: {
+                radialBar: {
+                    hollow: {
+                        margin: 0,
+                        size: '82%',
+                        image: undefined,
+                        imageOffsetX: 0,
+                        imageOffsetY: 0,
+                        position: 'front',
+                        dropShadow: {
+                            enabled: false,
+                            top: 3,
+                            left: 0,
+                            blur: 4,
+                            color: 'rgba(0, 169, 255, 0.15)',
+                            opacity: 0.65
+                        }
+                    },
+                    track: {
+                        background: '#e6f7ff', // Change this color to the desired one
+                        margin: 0,
+                        dropShadow: {
+                            enabled: false,
+                            top: -3,
+                            left: 0,
+                            blur: 4,
+                            color: 'rgba(135, 206, 250, 0.85)', // Change this color to the desired one
+                            opacity: 0.65
+                        }
+                    },
+                    dataLabels: {
+                        showOn: 'always',
+                        name: {
+                            offsetY: -25,
+                            show: true,
+                            color: '#6c757d',
+                            fontSize: '16px'
+                        },
+                        value: {
+                            formatter: function (val) {
+                                return val + "%";
+                            },
+                            color: '#000',
+                            fontSize: '45px',
+                            show: true,
+                            offsetY: 10,
+                        }
+                    }
+                }
+            },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shade: 'dark',
+                    type: 'horizontal',
+                    shadeIntensity: 0.5,
+                    gradientToColors: ['#ffcc80'], // Change this color to the desired one
+                    inverseColors: false,
+                    opacityFrom: 1,
+                    opacityTo: 1,
+                    stops: [0, 100]
+                }
+            },
+            colors: ["#ffcc80"], // Change this color to the desired one
+            labels: ['Humidity'],
+        };
+
+
+        var chart = new ApexCharts(document.querySelector("#chart4-2"), options);
+        chart.render();
 
 // chart 5
 
