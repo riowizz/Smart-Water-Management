@@ -17,7 +17,7 @@
   <!-- loader-->
 	<link href="assets/css/pace.min.css" rel="stylesheet" />
 
-  <title>Soil Optimization</title>
+  <title>Smart Water Management</title>
 </head>
 
 <body>
@@ -116,7 +116,7 @@
             });
 
             if (filled) {
-                sendRequest(form_object, "http://localhost:8000/api/v1/auth/login/", (response) => {
+                sendRequest(form_object, "https://soil-optimization.onrender.com/api/v1/auth/login/", (response) => {
                   console.log(response)
                     if (!response.access_token) {
                         alert(response.message)

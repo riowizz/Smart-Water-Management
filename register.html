@@ -155,7 +155,7 @@
             if (form_object.password !== form_object.confirmpassword) {
                 alert("password mismatch")
             } else {
-                sendPost(form_object, "http://localhost:8000/api/farmer-login", (response) => {
+                sendPost(form_object, "https://soil-optimization.onrender.com/api/v1/register", (response) => {
                     if (response.error) {
                         alert(response.message)
                     } else {

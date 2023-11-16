@@ -754,7 +754,7 @@
                                         <div class="card radius-10 mb-0 shadow-none bg-light-success">
                                             <div class="card-body p-4">
                                                 <div class="text-center">
-                                                    <p class="mb-0 text-purple">HIGH</p>
+                                                    <p class="mb-0 text-purple" id="moisture">HIGH</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -797,7 +797,7 @@
                                         <div class="card radius-10 mb-0 shadow-none bg-light-orange">
                                             <div class="card-body p-4">
                                                 <div class="text-center">
-                                                    <p class="mb-0 text-purple">LOW</p>
+                                                    <p class="mb-0 text-purple" id="temperature">LOW</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -840,7 +840,7 @@
                                         <div class="card radius-10 mb-0 shadow-none bg-light-purple">
                                             <div class="card-body p-4">
                                                 <div class="text-center">
-                                                    <p class="mb-0 text-purple">HIGH</p>
+                                                    <p class="mb-0 text-purple" id="humidity">HIGH</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1101,7 +1101,40 @@
         let humidity = values["humidity"];
 
 
+        //if moisture > 75 then HIGH else if moisture > 50 then MEDIUM else LOW
+        if (moisture > 75) {
+            document.getElementById("moisture").innerHTML = "HIGH";
+            document.getElementById("moisture").style.color = "red";
+        } else if (moisture > 50) {
+            document.getElementById("moisture").innerHTML = "MEDIUM";
+            document.getElementById("moisture").style.color = "orange";
+        } else {
+            document.getElementById("moisture").innerHTML = "LOW";
+            document.getElementById("moisture").style.color = "green";
+        }
+        //if temperature > 75 then HIGH else if temperature > 50 then MEDIUM else LOW
 
+        if (temperature > 75) {
+            document.getElementById("temperature").innerHTML = "HIGH";
+            document.getElementById("temperature").style.color = "red";
+        } else if (temperature > 50) {
+            document.getElementById("temperature").innerHTML = "MEDIUM";
+            document.getElementById("temperature").style.color = "orange";
+        } else {
+            document.getElementById("temperature").innerHTML = "LOW";
+            document.getElementById("temperature").style.color = "green";
+        }
+//if humidity > 75 then HIGH else if humidity > 50 then MEDIUM else LOW
+        if (humidity > 75) {
+            document.getElementById("humidity").innerHTML = "HIGH";
+            document.getElementById("humidity").style.color = "red";
+        } else if (humidity > 50) {
+            document.getElementById("humidity").innerHTML = "MEDIUM";
+            document.getElementById("humidity").style.color = "orange";
+        } else {
+            document.getElementById("humidity").innerHTML = "LOW";
+            document.getElementById("humidity").style.color = "green";
+        }
 
 
         // chart 4
