@@ -530,13 +530,22 @@
   <script src="assets/js/app.js"></script>
 
 <script>
+    
+    function findMostRecentValues(data) {
+        // Sort the data based on the 'date' property in descending order
+        data.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        // Return the first element of the sorted array
+        return data[0];
+    }
+
     let user = getUser().user;
     document.querySelector(".dropdown-user-name").innerHTML=user.username;
     document.querySelector(".user-name").innerHTML=user.username;
-    sendGet(`http://localhost:8000/api/v1/sermon/`, (res) => {
+    sendGet(`https://soil-optimization.onrender.com/api/farmdata/`, (res) => {
         let cont = document.getElementById("timeline");
         let str = ``;
-        res.map((item)=>{
+        /*res.map((item)=>{
             str+=`
             <div class="row">
 								<!-- timeline item 1 left dot -->
@@ -557,18 +566,146 @@
 								<div class="col py-2">
 									<div class="card radius-15">
 										<div class="card-body">
-											<div class="float-end text-muted">${item.date}</div>
-											<h4 class="card-title text-muted">${item.title}</h4>
-											<p class="card-text">${item.description}</p>
+											<div class="float-end text-muted">${status}</div>
+											<h4 class="card-title text-muted">${elementId}</h4>
+											<p class="card-text">${'item.description'}</p>
 										</div>
 									</div>
 								</div>
 							</div>
             `;
-        });
+        });*/
         cont.innerHTML=str;
+       
         console.log(res)
+        let values = findMostRecentValues(res);
+        console.log(values)
+        let moisture = values["moisture"];
+        let temperature = values["temperature"];
+        let humidity = values["humidity"];
+        function updateRecommendation(value, thresholdHigh, thresholdGood, elementId, recommendation) {
+            console.log(document.getElementById(elementId))
+            var status = "";
 
+            if (value > thresholdHigh) {
+                status = "HIGH";
+                return `
+            <div class="row">
+								<!-- timeline item 1 left dot -->
+								<div class="col-auto text-center flex-column d-none d-sm-flex">
+									<div class="row h-50">
+										<div class="col">&nbsp;</div>
+										<div class="col">&nbsp;</div>
+									</div>
+									<h5 class="m-2">
+									<span class="badge rounded-pill bg-light border">&nbsp;</span>
+								</h5>
+									<div class="row h-50">
+										<div class="col border-end">&nbsp;</div>
+										<div class="col">&nbsp;</div>
+									</div>
+								</div>
+								<!-- timeline item 1 event content -->
+								<div class="col py-2">
+									<div class="card radius-15">
+										<div class="card-body">
+											<div class="float-end text-muted">${status}</div>
+											<h4 class="card-title text-muted">${elementId}</h4>
+											<p class="card-text">${recommendation["HIGH"]}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+            `;
+            } else if (value > thresholdGood) {
+                status = "GOOD";
+                return `
+            <div class="row">
+								<!-- timeline item 1 left dot -->
+								<div class="col-auto text-center flex-column d-none d-sm-flex">
+									<div class="row h-50">
+										<div class="col">&nbsp;</div>
+										<div class="col">&nbsp;</div>
+									</div>
+									<h5 class="m-2">
+									<span class="badge rounded-pill bg-light border">&nbsp;</span>
+								</h5>
+									<div class="row h-50">
+										<div class="col border-end">&nbsp;</div>
+										<div class="col">&nbsp;</div>
+									</div>
+								</div>
+								<!-- timeline item 1 event content -->
+								<div class="col py-2">
+									<div class="card radius-15">
+										<div class="card-body">
+											<div class="float-end text-muted">${status}</div>
+											<h4 class="card-title text-muted">${elementId}</h4>
+											<p class="card-text">${recommendation["GOOD"]}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+            `;
+            } else {
+                status = "LOW";
+                return `
+            <div class="row">
+								<!-- timeline item 1 left dot -->
+								<div class="col-auto text-center flex-column d-none d-sm-flex">
+									<div class="row h-50">
+										<div class="col">&nbsp;</div>
+										<div class="col">&nbsp;</div>
+									</div>
+									<h5 class="m-2">
+									<span class="badge rounded-pill bg-light border">&nbsp;</span>
+								</h5>
+									<div class="row h-50">
+										<div class="col border-end">&nbsp;</div>
+										<div class="col">&nbsp;</div>
+									</div>
+								</div>
+								<!-- timeline item 1 event content -->
+								<div class="col py-2">
+									<div class="card radius-15">
+										<div class="card-body">
+											<div class="float-end text-muted">${status}</div>
+											<h4 class="card-title text-muted">${elementId}</h4>
+											<p class="card-text">${recommendation["LOW"]}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+            `;
+            }
+
+            // document.getElementById(elementId).innerHTML = status;
+        }
+
+// Update moisture status
+        str+=updateRecommendation(moisture, 75, 50, "moisture", {
+            LOW: "Add water to the soil",
+            GOOD: "No action required",
+            HIGH: "Reduce water supply"
+        });
+
+// Update temperature status
+        str+=updateRecommendation(temperature, 30, 20, "temperature",
+            {
+                LOW: "Increase temperature",
+                GOOD: "No action required",
+                HIGH: "Reduce temperature"
+            });
+
+// Update humidity status
+        str+=updateRecommendation(humidity, 75, 50, "humidity",
+            {
+                LOW: "Increase humidity",
+                GOOD: "No action required",
+                HIGH: "Reduce humidity"
+            });
+
+        cont.innerHTML += (str)
     });
 </script>
 </body>
