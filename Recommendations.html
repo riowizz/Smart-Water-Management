@@ -583,7 +583,7 @@
 									<div class="card radius-15">
 										<div class="card-body">
 											<div class="float-end text-muted">${status}</div>
-											<h4 class="card-title text-muted">${elementId}</h4>
+											<h4 class="card-title text-muted">${elementId.toTitle()}</h4>
 											<p class="card-text">${'item.description'}</p>
 										</div>
 									</div>
@@ -600,6 +600,9 @@
         let temperature = values["temperature"];
         let humidity = values["humidity"];
 
+        String.prototype.toTitle = function() {
+  return this.replace(/(^|\s)\S/g, function(t) { return t.toUpperCase() });
+}
         function updateRecommendation(value, thresholdHigh, thresholdGood, elementId, recommendation) {
             console.log(document.getElementById(elementId))
             var status = "";
@@ -627,8 +630,8 @@
 									<div class="card radius-15">
 										<div class="card-body">
 											<div class="float-end text-muted">${status}</div>
-											<h4 class="card-title text-muted">${elementId}</h4>
-											<p class="card-text">${recommendation["HIGH"]}</p>
+											<h4 class="card-title text-muted">${elementId.toTitle()}</h4>
+											<p class="card-text bg-light-purple">${recommendation["HIGH"]}</p>
 										</div>
 									</div>
 								</div>
@@ -657,8 +660,8 @@
 									<div class="card radius-15">
 										<div class="card-body">
 											<div class="float-end text-muted">${status}</div>
-											<h4 class="card-title text-muted">${elementId}</h4>
-											<p class="card-text">${recommendation["GOOD"]}</p>
+											<h4 class="card-title text-muted">${elementId.toTitle()}</h4>
+											<p class="card-text bg-light-purple">${recommendation["GOOD"]}</p>
 										</div>
 									</div>
 								</div>
@@ -687,8 +690,8 @@
 									<div class="card radius-15">
 										<div class="card-body">
 											<div class="float-end text-muted">${status}</div>
-											<h4 class="card-title text-muted">${elementId}</h4>
-											<p class="card-text">${recommendation["LOW"]}</p>
+											<h4 class="card-title text-muted">${elementId.toTitle()}</h4>
+											<p class="card-text bg-light-purple">${recommendation["LOW"]}</p>
 										</div>
 									</div>
 								</div>
