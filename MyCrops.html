@@ -121,8 +121,7 @@
                 <ul>
                     <li><a href="home.html"><i class="bi bi-arrow-right-short"></i>Home</a>
                     </li>
-                    <li><a href="MyCrops.html"><i class="bi bi-arrow-right-short"></i>My crops</a>
-                    </li>
+
                     <li><a href="Recommendations.html"><i class="bi bi-arrow-right-short"></i>My recommendations</a>
                     </li>
 
@@ -184,7 +183,7 @@
                                 <form class="row g-3">
                                     <div class="col-12">
                                         <label class="form-label">Crop Name</label>
-                                        <select name="severity" class="form-select dt">
+                                        <select name="name" class="form-select dt">
                                             <option>Maize</option>
                                             <option>Wheat</option>
                                             <option>Peas</option>
@@ -193,7 +192,7 @@
                                     </div>
                                     <div class="col-12">
                                         <label class="form-label">Planting Date</label>
-                                        <input type="date" name="date" class="form-select dt"/>
+                                        <input type="date" name="planting_date" class="form-select dt"/>
                                     </div>
 
                                     <div class="col-12">
@@ -203,7 +202,7 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="d-grid">
-                                            <button class="btn btn-primary" id="emergency-btn">Post My Crop</button>
+                                            <button class="btn btn-primary" id="crop-btn">Post My Crop</button>
                                         </div>
                                     </div>
                                 </form>
@@ -330,6 +329,7 @@
 <script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
 <script src="assets/js/pace.min.js"></script>
 <script src="assets/js/globals.js"></script>
+<script src="assets/js/common.js"></script>
 <script src="assets/js/send.js"></script>
 <script src="assets/js/axios.min.js"></script>
 <!--app-->
@@ -338,19 +338,11 @@
 <script>
 
     let user = getUser().user;
-    document.querySelector(".dropdown-user-name").innerHTML=user.username;
+    // document.querySelector(".dropdown-user-name").innerHTML=user.username;
     document.querySelector(".user-name").innerHTML=user.username;
 
-    sendGet(API + "data/get-all-hospitals", ({response}) => {
-        // console.log(response);
-        let str = ``;
-        response.map(({name}) => {
-            str += `<option>${name}</option>`;
-        })
-        document.getElementById("hospitals").innerHTML = str;
-    })
 
-    document.getElementById("emergency-btn").addEventListener("click", register)
+    document.getElementById("crop-btn").addEventListener("click", register)
 
     function register(e) {
         e.preventDefault()
@@ -366,36 +358,33 @@
 
 
         if (filled) {
-            form_object["status"] = "Not Answered"
-            if (form_object.password !== form_object.confirmpassword) {
-                alert("password mismatch")
-            } else {
-                sendPost({data: form_object}, API + "data/new-data/emergencies_table", (response) => {
+            console.log(form_object)
+            form_object["amount"] = 1;
+            form_object["date"] = new Date().toISOString();
+            // form_object["message_type"] = "prescription";
+            sendPost(form_object, API + "api/v1/crop/", (response) => {
                     if (response.error) {
                         alert(response.message)
                     } else {
                         alert("success")
                     }
                 })
-                console.log(form_object)
-            }
         } else {
             alert("kindly fill all fields")
         }
     }
 
-    sendGet(API + "data/get-all/emergencies_table", ({response}) => {
-        let table_name = "emergencies-table";
+    sendGet(API + "api/v1/crop/", (response) => {
+        let table_name = "crop-table";
 
         let columns = [
-            {db_name: "receipient_type", display_name: "receipient_type", align: "left", show: true},
-            {db_name: "receipient_name", display_name: "receipient_name", align: "left", show: true},
-            {db_name: "severity", display_name: "severity", align: "left", show: true},
-            {db_name: "description", display_name: "description", align: "left", show: true},
-            {db_name: "status", display_name: "status", align: "left", show: true},
+            {db_name: "name", display_name: "Name", align: "left", show: true},
+            {db_name: "planting_date", display_name: "Planting Date", align: "left", show: true},
+            {db_name: "description", display_name: "Description", align: "left", show: true},
 
         ]
-        createTable(table_name, columns, response);
+        console.log(response)
+        // createTable(table_name, columns, response);
     });
     function createTable(table_name, columns, data) {
         console.log(data)

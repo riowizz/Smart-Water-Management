@@ -1,11 +1,4 @@
-const _axios = axios.create({
-  baseURL: 'http://localhost:8000',
-  withCredentials: true
-});
 
-const _config = {
-    headers: { Authorization: `Bearer ${getToken()}` }
-};
 
 function sendRequest(info, URL, callback) {
     //alter(info)
@@ -27,7 +20,9 @@ function sendRequest(info, URL, callback) {
 }
 
 function sendGet(URL, callback) {
-    _axios.get(URL, _config)
+    axios.get(URL, {
+    headers: { Authorization: `Bearer ${getToken()}` }
+})
         .then(response => {
             callback(response.data);
         })
@@ -35,7 +30,9 @@ function sendGet(URL, callback) {
 
 function sendPost(info, URL, callback) {
 
-    _axios.post(URL, info, _config)
+    axios.post(URL, info, {
+    headers: { Authorization: `Bearer ${getToken()}` }
+})
         .then((response, err) => {
             if (err)
                 alert("error")
@@ -44,7 +41,9 @@ function sendPost(info, URL, callback) {
 }
 
 function sendDelete(URL, callback) {
-    _axios.delete(URL, _config)
+    axios.delete(URL, {
+    headers: { Authorization: `Bearer ${getToken()}` }
+})
         .then(response => {
             callback(response.data);
         })

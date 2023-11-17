@@ -127,8 +127,7 @@
                 <ul>
                     <li><a href="home.html"><i class="bi bi-arrow-right-short"></i>Home</a>
                     </li>
-                    <li><a href="MyCrops.html"><i class="bi bi-arrow-right-short"></i>My crops</a>
-                    </li>
+
                     <li><a href="Recommendations.html"><i class="bi bi-arrow-right-short"></i>My recommendations</a>
                     </li>
 
@@ -405,7 +404,7 @@
 
 
         <div class="row">
-            <div class="col-12 col-lg-12 col-xl-12 d-flex">
+            <div class="col-12 col-lg-12 col-xl-6 d-flex">
                 <div class="card radius-10 w-100">
                     <div class="card-header bg-transparent p-3">
                         <div class="row row-cols-1 row-cols-lg-2 g-3 align-items-center">
@@ -425,6 +424,30 @@
 
                     <div class="card-body">
                         <div id="chart5"></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-12 col-lg-12 col-xl-6 d-flex">
+                <div class="card radius-10 w-100">
+                    <div class="card-header bg-transparent p-3">
+                        <div class="row row-cols-1 row-cols-lg-2 g-3 align-items-center">
+                            <div class="col">
+                                <h5 class="mb-0">Moisture vs Humidity</h5>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex align-items-center justify-content-sm-end gap-3 cursor-pointer">
+                                    <div class="font-13"><i class="bi bi-circle-fill text-info"></i><span class="ms-2">Moisture</span>
+                                    </div>
+                                    <div class="font-13"><i class="bi bi-circle-fill text-orange"></i><span
+                                            class="ms-2">Humidity</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div id="chart5-1"></div>
                     </div>
 
                 </div>
@@ -991,6 +1014,65 @@
             }
         }
         var chartLine = new ApexCharts(document.querySelector('#chart5'), optionsLine);
+        chartLine.render();
+
+        //5-2
+        var optionsLine = {
+            chart: {
+                foreColor: '#9ba7b2',
+                height: 275,
+                type: 'line',
+                toolbar: {
+                    show: !1
+                },
+                zoom: {
+                    enabled: false
+                },
+                dropShadow: {
+                    enabled: true,
+                    top: 3,
+                    left: 2,
+                    blur: 4,
+                    opacity: 0.1,
+                }
+            },
+            stroke: {
+                curve: 'smooth',
+                width: 3
+            },
+            colors: ["#32bfff", '#ff6632'],
+            series: [{
+                name: "Moisture",
+                data: [1, 15, 56, 20, 33, 27, 15]
+            }, {
+                name: "Temperature",
+                data: [30, 33, 21, 42, 30, 33, 21]
+            }],
+            markers: {
+                size: 4,
+                strokeWidth: 0,
+                hover: {
+                    size: 7
+                }
+            },
+            grid: {
+                show: true,
+                padding: {
+                    bottom: 0
+                }
+            },
+            //labels: ['01/15/2002', '01/16/2002', '01/17/2002', '01/18/2002', '01/19/2002', '01/20/2002'],
+            xaxis: {
+                //type: 'datetime',
+                categories: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
+            },
+            legend: {
+                position: 'top',
+                horizontalAlign: 'right',
+                offsetY: -20
+            }
+        }
+        var chartLine = new ApexCharts(document.querySelector('#chart5-1'), optionsLine);
         chartLine.render();
 
     }
