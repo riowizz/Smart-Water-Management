@@ -28,7 +28,7 @@
     <link href="assets/css/semi-dark.css" rel="stylesheet"/>
     <link href="assets/css/header-colors.css" rel="stylesheet"/>
 
-    <title>SoilOptimization</title>
+    <title>SmartMonitor</title>
 </head>
 
 <body>
@@ -47,11 +47,7 @@
                 <i class="bi bi-search"></i>
             </div>
             <form class="searchbar d-none d-xl-flex ms-auto">
-                <div class="position-absolute top-50 translate-middle-y search-icon ms-3"><i class="bi bi-search"></i>
-                </div>
-                <input class="form-control" type="text" placeholder="Type here to search">
-                <div class="position-absolute top-50 translate-middle-y d-block d-xl-none search-close-icon"><i
-                        class="bi bi-x-lg"></i></div>
+
             </form>
             <div class="top-navbar-right ms-3">
                 <ul class="navbar-nav align-items-center">
@@ -109,7 +105,7 @@
                 <img src="assets/images/logo-icon.jpg" class="logo-icon" alt="logo icon">
             </div>
             <div>
-                <h4 class="logo-text">SoilOptimization</h4>
+                <h4 class="logo-text">SmartMonitor</h4>
             </div>
             <div class="toggle-icon ms-auto"><i class="bi bi-chevron-double-left"></i>
             </div>
@@ -340,7 +336,11 @@
 <script src="assets/js/app.js"></script>
 
 <script>
-    //get-all-hospitals
+
+    let user = getUser().user;
+    document.querySelector(".dropdown-user-name").innerHTML=user.username;
+    document.querySelector(".user-name").innerHTML=user.username;
+
     sendGet(API + "data/get-all-hospitals", ({response}) => {
         // console.log(response);
         let str = ``;

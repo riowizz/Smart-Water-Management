@@ -28,7 +28,7 @@
   <link href="assets/css/semi-dark.css" rel="stylesheet" />
   <link href="assets/css/header-colors.css" rel="stylesheet" />
 
-  <title>Soil Optimization</title>
+  <title>Smart Monitor</title>
 </head>
 
 <body>
@@ -57,7 +57,7 @@
               <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
                 <div class="user-setting d-flex align-items-center gap-1">
                   <img src="assets/images/avatars/avatar-1.png" class="user-img" alt="">
-                  <div class="user-name d-none d-sm-block">Soil Optimization</div>
+                  <div class="user-name d-none d-sm-block">Smart Monitor</div>
                 </div>
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
@@ -115,7 +115,7 @@
               <img src="assets/images/logo-icon.jpg" class="logo-icon" alt="logo icon">
             </div>
             <div>
-              <h4 class="logo-text">Soil Optimization</h4>
+              <h4 class="logo-text">Smart Monitor</h4>
             </div>
             <div class="toggle-icon ms-auto"><i class="bi bi-chevron-double-left"></i>
             </div>
@@ -531,6 +531,9 @@
   <script src="assets/js/app.js"></script>
 
 <script>
+    let user = getUser().user;
+    document.querySelector(".dropdown-user-name").innerHTML=user.username;
+    document.querySelector(".user-name").innerHTML=user.username;
     sendGet(`http://localhost:8000/api/v1/sermon/`, (res) => {
         let cont = document.getElementById("timeline");
         let str = ``;
