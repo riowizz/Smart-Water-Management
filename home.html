@@ -616,51 +616,12 @@
     document.querySelector(".dropdown-user-name").innerHTML=user.username;
     document.querySelector(".user-name").innerHTML=user.username;
 
-    function processDataForDailyChart(data) {
-        // Filter data for the previous week
-        const previousWeekData = data.filter(record => {
-            const recordDate = moment(record.date);
-            const currentDate = moment();
-            return recordDate.isoWeek() === currentDate.isoWeek() - 1;
-        });
 
-        // Group data by day
-        const groupedData = previousWeekData.reduce((acc, record) => {
-            const dayLabel = moment(record.date).format('ddd'); // Assuming 'date' is in ISO format
-
-            if (!acc[dayLabel]) {
-                acc[dayLabel] = {
-                    moisture: [],
-                    temperature: [],
-                };
-            }
-
-            acc[dayLabel].moisture.push(Number(record.moisture));
-            acc[dayLabel].temperature.push(Number(record.temperature));
-
-            return acc;
-        }, {});
-
-        // Calculate average values for each day
-        const dailyAverages = Object.keys(groupedData).map((dayLabel) => {
-            const dayData = groupedData[dayLabel];
-            const moistureAverage = dayData.moisture.reduce((sum, value) => sum + value, 0) / dayData.moisture.length;
-            const temperatureAverage = dayData.temperature.reduce((sum, value) => sum + value, 0) / dayData.temperature.length;
-
-            return {
-                name: dayLabel,
-                data: [moistureAverage, temperatureAverage],
-            };
-        });
-
-        return dailyAverages;
-    }
 
 
     function change_color(el, _class) {
         let _el = el.parentElement.parentElement.parentElement
         _el.classList.remove("bg-light-orange", "bg-light-purple", "bg-light-success");
-        console.log(_el, _class)
         _el.classList.add(_class);
         // console.log(el.parentElement.parentElement.parentElement)
     }
@@ -675,8 +636,29 @@
     }
 
 
+    function get_mtplot_values(values) {
+        console.log(values)
+        let x = [];
+        let y = [];
+        for (let i = 0; i < values.length; i++) {
+            x.push(values[i].moisture);
+            y.push(values[i].temperature);
+        }
+        return {x: x, y: y};
+    }
+
+    function get_mhplot_values(values) {
+        console.log(values)
+        let x = [];
+        let y = [];
+        for (let i = 0; i < values.length; i++) {
+            x.push(values[i].moisture);
+            y.push(values[i].temperature);
+        }
+        return {x: x, y: y};
+    }
+
     function draw_graphs(data) {
-        console.log(processDataForDailyChart(data))
         let values = findMostRecentValues(data);
         console.log(values)
         let moisture = values["moisture"];
@@ -958,6 +940,10 @@
         chart.render();
 
 
+        //chart 5
+
+        let _data = get_mtplot_values(data);
+        let _data1 = get_mhplot_values(data);
         var optionsLine = {
             chart: {
                 foreColor: '#9ba7b2',
@@ -984,10 +970,10 @@
             colors: ["#32bfff", '#ff6632'],
             series: [{
                 name: "Moisture",
-                data: [1, 15, 56, 20, 33, 27, 15]
+                data: _data['x']
             }, {
                 name: "Temperature",
-                data: [30, 33, 21, 42, 30, 33, 21]
+                data: _data['y']
             }],
             markers: {
                 size: 4,
@@ -1043,10 +1029,10 @@
             colors: ["#32bfff", '#ff6632'],
             series: [{
                 name: "Moisture",
-                data: [1, 15, 56, 20, 33, 27, 15]
+                data: _data1['x']
             }, {
                 name: "Temperature",
-                data: [30, 33, 21, 42, 30, 33, 21]
+                data: _data1['y']
             }],
             markers: {
                 size: 4,
